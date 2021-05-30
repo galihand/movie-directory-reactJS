@@ -38,7 +38,11 @@ const Layout = ({ children }) => {
         <div style={{ minHeight: '55vh' }}>
           {children}
         </div>
-        <div style={{ height: '30vh' }} className='bg-dark mt-5'>
+        <div style={{ height: '30vh' }} className='bg-dark mt-5 text-center py-5'>
+          <p className='text-muted'>Created at may 2021</p>
+          <p className='text-muted'>Supported API by TMDB</p>
+          <p className='text-muted'>Originaly made by Galih Andyan</p>
+          <p className='text-muted'>Contact at andyangalih@gmail.com</p>
         </div>
       </div >
     </React.Fragment >

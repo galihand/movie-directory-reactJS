@@ -5,6 +5,18 @@
   padding: 0;
   box-sizing: border-box;
   color: $dark;
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: lightgrey;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: $dark;
+    border-radius: 5px;
+  }
 }
 
 p {
