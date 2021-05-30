@@ -70,6 +70,7 @@ const Search = () => {
             <Form.Row>
               <Col>
                 <Form.Control
+                  required
                   value={after}
                   onChange={e => setAfter(e.target.value)}
                   type='date' placeholder='after' autoComplete='false'
@@ -79,6 +80,7 @@ const Search = () => {
               to
               <Col>
                 <Form.Control
+                  required
                   value={before}
                   onChange={e => setBefore(e.target.value)}
                   type='date' placeholder='before' autoComplete='false'
