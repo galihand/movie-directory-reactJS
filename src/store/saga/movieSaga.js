@@ -91,14 +91,15 @@ function* getGenres() {
 }
 
 function* getByGenre(action) {
-  const { genre_id, page } = action.payload
+  const { genre_id, page, year } = action.payload
   const URL = `${process.env.REACT_APP_TMDB_API_BASE_URL}/discover/movie`
   try {
     const res = yield axios.get(URL, {
       params: {
         api_key: process.env.REACT_APP_TMDB_API_KEY,
         with_genres: genre_id,
-        page
+        page,
+        year: year ? year : null
       }
     })
 

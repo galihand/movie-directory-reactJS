@@ -1,5 +1,6 @@
+import moment from "moment"
 import React, { Suspense, useEffect, useState } from "react"
-import { Col, Container, Pagination } from "react-bootstrap"
+import { Button, Col, Container, Form, Pagination } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useLocation, useParams } from "react-router"
 import Layout from "../components/Layout"
@@ -8,13 +9,16 @@ import { getMovieByGenre } from "../store/action/movieAction"
 const MovieCard = React.lazy(() => import('../components/MovieCard'))
 
 const Genres = () => {
+  const [after, setAfter] = useState()
+  const [before, setBefore] = useState()
   const { genre_id } = useParams()
+  const [filtered, setFiltered] = useState([])
   const page = +new URLSearchParams(useLocation().search).get('page') || 1
   const dispatch = useDispatch()
   const history = useHistory()
   const { collection, genres } = useSelector(state => state.movieReducer)
   const [pageDisplay, setPageDisplay] = useState([])
-  const genre = genres.filter(item => item.id === +genre_id)[0].name
+  const genre = genres.filter(item => item.id === +genre_id)[0]?.name
 
   useEffect(() => {
     let before = []
@@ -30,6 +34,7 @@ const Genres = () => {
 
 
   useEffect(() => {
+    setFiltered()
     window.scroll({
       top: 0,
       behavior: 'smooth'
@@ -38,7 +43,17 @@ const Genres = () => {
   }, [dispatch, genre_id, page])
 
   const changePageHandler = page => {
+    setFiltered()
     history.push(`/genre/${genre_id}?page=${page}`)
+    window.scroll({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  const submitFilter = e => {
+    e.preventDefault()
+    setFiltered(collection.results.filter(item => moment(item.release_date).isBetween(after, before, 'year')))
     window.scroll({
       top: 0,
       behavior: 'smooth'
@@ -49,15 +64,47 @@ const Genres = () => {
     <Layout>
       <Container >
         <div className='my-5'>
-          <h3 className='pb-2 mb-2 border-bottom font-weight-bold'>{genre} Movie Collections</h3>
-          <div className='d-flex flex-wrap justify-content-center'>
-            {collection?.results?.map(item =>
-              <Col md={2} sm={3} xs={4} className='p-0 mx-2 my-2' key={item.id}>
-                <Suspense fallback={<Loading />}>
-                  <MovieCard data={item} />
-                </Suspense>
+          <div className='px-2 mb-2 border-bottom d-flex justify-content-between align-items-center'>
+            <h3 className='font-weight-bold'>{genre} Movie Collections</h3>
+          </div>
+          <Form onSubmit={submitFilter}>
+            <Form.Row>
+              <Col>
+                <Form.Control
+                  required
+                  value={after}
+                  onChange={e => setAfter(e.target.value)}
+                  type='date' placeholder='after' autoComplete='false'
+                  size='sm'
+                />
               </Col>
-            )}
+              to
+              <Col>
+                <Form.Control
+                  required
+                  value={before}
+                  onChange={e => setBefore(e.target.value)}
+                  type='date' placeholder='before' autoComplete='false'
+                  size='sm'
+                />
+              </Col>
+              <Button type='submit' variant='outline-secondary' size='sm'>filter</Button>
+            </Form.Row>
+          </Form>
+          <div className='d-flex flex-wrap justify-content-center'>
+            {
+              filtered ? filtered.map(item =>
+                <Col md={2} sm={3} xs={4} className='p-0 mx-2 my-2' key={item.id}>
+                  <Suspense fallback={<Loading />}>
+                    <MovieCard data={item} />
+                  </Suspense>
+                </Col>) : collection?.results?.map(item =>
+                  <Col md={2} sm={3} xs={4} className='p-0 mx-2 my-2' key={item.id}>
+                    <Suspense fallback={<Loading />}>
+                      <MovieCard data={item} />
+                    </Suspense>
+                  </Col>
+                )}
           </div>
           <div className='d-flex justify-content-center mt-3 border-top pt-3'>
             <Pagination>

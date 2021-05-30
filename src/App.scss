@@ -33,6 +33,15 @@ input[type="text"] {
   }
 }
 
+input[type="number"] {
+  border-color: $secondary;
+  &:focus {
+    appearance: none;
+    box-shadow: none;
+    border-color: $secondary;
+  }
+}
+
 input[list]::-webkit-calendar-picker-indicator {
   display: none;
 }

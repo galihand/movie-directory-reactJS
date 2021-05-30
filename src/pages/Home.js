@@ -51,7 +51,9 @@ const Home = () => {
       </div>
       <Container >
         <div className='my-5'>
-          <h3 className='pb-2 mb-2 border-bottom font-weight-bold'>Most Popular</h3>
+          <div className='px-2 mb-2 border-bottom d-flex justify-content-between align-items-center'>
+            <h3 className='font-weight-bold'>Most Popular</h3>
+          </div>
           <div className='d-flex flex-wrap justify-content-center'>
             {collection?.results?.map(item =>
               <Col md={2} sm={3} xs={4} className='p-0 mx-2 my-2' key={item.id}>

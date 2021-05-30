@@ -3,7 +3,6 @@ import { Button, Form, InputGroup } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import { searchMovie } from "../store/action/movieAction"
-import '../styles/SearchBox.scss'
 
 
 const SearchBox = () => {
