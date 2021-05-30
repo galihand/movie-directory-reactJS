@@ -1,0 +1,22 @@
+.card__cast {
+  border-radius: 15px 15px 0 0 !important;
+  bottom: 0;
+  border: none !important;
+  img {
+    border-radius: 15px 15px 0 0;
+  }
+
+  &-info {
+    margin: 0.5rem;
+    .name {
+      margin: 0;
+      font-weight: 700;
+    }
+    .char {
+      margin: 0;
+      color: grey;
+      font-weight: 600;
+      font-style: italic;
+    }
+  }
+}

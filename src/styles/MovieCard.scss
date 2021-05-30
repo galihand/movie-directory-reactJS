@@ -1,0 +1,25 @@
+@import "../App.scss";
+
+.card__movie {
+  transition: all 0.5s;
+  &:hover {
+    bottom: 10%;
+  }
+  border-radius: 15px 15px 0 0 !important;
+  bottom: 0;
+  border: none !important;
+  cursor: pointer;
+  img {
+    border-radius: 15px 15px 0 0;
+  }
+  .movie {
+    &__title {
+      margin-top: 0.5rem;
+      font-weight: bolder;
+    }
+    &__date {
+      font-size: smaller;
+      color: grey;
+    }
+  }
+}

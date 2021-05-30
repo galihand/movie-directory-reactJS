@@ -1,0 +1,58 @@
+@import "~bootstrap/scss/bootstrap";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: $dark;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+input[type="text"] {
+  border-color: $secondary;
+  &:focus {
+    appearance: none;
+    box-shadow: none;
+    border-color: $secondary;
+  }
+}
+
+input[list]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.page-item {
+  .page-link {
+    border-color: lightgray;
+    color: $secondary;
+    transition: all 0.3s;
+    &:hover {
+      border-color: lightgray;
+      background-color: lightgray;
+      color: white;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  &.active {
+    .page-link {
+      border-color: $secondary;
+      background-color: $secondary;
+      color: white;
+    }
+  }
+
+  &.disabled {
+    .page-link {
+      border-color: lightgray;
+      // background-color: lightgray;
+      color: lightgray;
+    }
+  }
+}
