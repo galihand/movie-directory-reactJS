@@ -52,7 +52,7 @@ const Search = () => {
 
   const submitFilter = e => {
     e.preventDefault()
-    setFiltered(collection.results.filter(item => moment(item.release_date).isBetween(after, before, 'year')))
+    setFiltered(collection.results.filter(item => moment(item.release_date).isBetween(after, before)))
     window.scroll({
       top: 0,
       behavior: 'smooth'
